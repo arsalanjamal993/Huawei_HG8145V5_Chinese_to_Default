@@ -1,0 +1,106 @@
+==================================================
+Huawei Router (HG8145V5) Unlock & WiFi Fix Guide
+==================================================
+
+Purpose:
+Yeh guide aap ke router se Chinese restrictions khatam karne
+me help karega
+
+--------------------------------------------------
+Zaroori Cheezain:
+--------------------------------------------------
+- LAN Cable (Router se laptop connect karne ke liye) LAN cable agar nahi hai toh simple WIFI se bhi kaam hojayega.
+- Windows Terminal App Download from Mirosoft Store("https://apps.microsoft.com/detail/9n0dx20hk701?ocid=webpdpshare")
+--------------------------------------------------
+STEP 1: Router se Connect hona
+--------------------------------------------------
+1. LAN cable router ke kisi bhi port mein lagayein.
+2. Laptop se connect karein.
+3. Windows Terminal open karein.
+4. Host Name:
+   192.168.100.1
+5. Connection Type:
+   Telnet
+6. Open par click karein.
+
+--------------------------------------------------
+STEP 2: Login Karna
+--------------------------------------------------
+Note: Password type karte waqt nazar nahi aata.
+
+Login Credentials:
+- Login: root
+- Password: adminHW
+
+Commands (Enter ke baad):
+--------------------------------
+su
+shell
+--------------------------------
+
+Expected Output:
+WAP(Dopra Linux) #
+
+--------------------------------------------------
+STEP 3: Backup Lena (Safety)
+--------------------------------------------------
+Purani files ka backup zaroor bana lein.
+
+Commands:
+--------------------------------
+cd /mnt/jffs2
+cp hw_boardinfo hw_boardinfo.bak
+cp hw_ctree.xml hw_ctree.xml.bak
+--------------------------------
+
+--------------------------------------------------
+STEP 4: Router ko Global (English) Banana
+--------------------------------------------------
+Neeche diye gaye commands aik aik kar ke run karein.
+
+Commands:
+--------------------------------
+sed -i 's/"CHINATELECOM"/"COMMON"/g' hw_boardinfo
+sed -i 's/"CHINA"/"COMMON"/g' hw_boardinfo
+rm -rf hw_default_ctree.xml
+cp -rf /etc/wap/hw_default_ctree.xml /mnt/jffs2/hw_default_ctree.xml
+rm -rf hw_ctree.xml
+--------------------------------
+
+--------------------------------------------------
+STEP 5: Router Restart Karein
+--------------------------------------------------
+Command:
+--------------------------------
+reboot
+--------------------------------
+
+Note:
+Router restart hoga.
+2 minute ka intezar karein.
+
+--------------------------------------------------
+STEP 6: WiFi MAC Block Khatam Karna
+--------------------------------------------------
+1. Browser mein open karein:
+   http://192.168.100.1
+
+2. Login Details:
+   - Username: telecomadmin
+   - Password: admintelecom
+
+3. Menu Path:
+   Security → WLAN MAC Filter
+
+4. Action:
+   - Enable WLAN MAC Filter UNCHECK karein
+   - Apply par click karein
+
+--------------------------------------------------
+RESULT:
+--------------------------------------------------
+✔ WiFi block disable ho chuka hai  
+✔ Router interface English ho chuka hai  
+✔ WiFi ab har device ke liye open hai  
+
+==================================================
